@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var viewModel = WeatherViewModelImpl(service: WeatherServiceImpl())
+    @State private var isPresented = false
     
     var body: some View {
         Group {
@@ -22,6 +23,16 @@ struct HomeView: View {
                         ForecastView(forecast: item)
                     }
                     .navigationTitle(Text("Эта ебаная погода"))
+                    .navigationBarItems(trailing:
+                            Button(action: {
+                                isPresented.toggle()
+                            }) {
+                                Text("В другом дизайне")
+                            }
+                        )
+                    .sheet(isPresented: $isPresented, content: {
+                        ModernView(forecasts: viewModel.forecasts)
+                    })
                 }
             default:
                 ProgressiveView(state: viewModel.state)
