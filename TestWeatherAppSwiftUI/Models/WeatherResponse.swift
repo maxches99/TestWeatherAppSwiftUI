@@ -13,7 +13,7 @@ struct WeatherResponse: Codable {
 }
 
 // MARK: - Forecast
-struct Forecast: Codable, Equatable, Identifiable {
+struct Forecast: Codable, Equatable, Identifiable, Hashable {
     let id = UUID()
     let name: String?
     var temperature: Int?

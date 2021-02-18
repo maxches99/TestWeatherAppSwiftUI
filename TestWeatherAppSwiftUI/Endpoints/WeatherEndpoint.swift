@@ -40,6 +40,4 @@ extension WeatherAPI: APIBuilder {
             return "latitude=\(latitude)&longitude=\(longitude)"
         }
     }
-    
-    
 }

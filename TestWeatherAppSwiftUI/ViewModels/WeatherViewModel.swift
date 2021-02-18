@@ -48,7 +48,7 @@ class WeatherViewModelImpl: NSObject, ObservableObject, WeatherViewModel {
             return
         }
         
-        let cancellable = service
+        service
             .request(from: .getWeather(latitude, longitude))
             .sink { [weak self] res in
                 guard let strongSelf = self else { return }
@@ -61,8 +61,7 @@ class WeatherViewModelImpl: NSObject, ObservableObject, WeatherViewModel {
             } receiveValue: { [weak self] response in
                 self?.forecasts = response.forecast
             }
-        
-        cancellables.insert(cancellable)
+            .store(in: &cancellables)
     }
 }
 
